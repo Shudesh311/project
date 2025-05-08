@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Voice Answer with Talking GIF</title>
+  <style>
+    body {
+      text-align: center;
+      margin-top: 50px;
+      background-image: url('/static/background image.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+
+    img {
+      width: 300px;
+      height: auto;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 16px;
+      width: 300px;
+    }
+
+    #answerText {
+      margin-top: 20px;
+      font-size: 20px;
+      color: yellow;
+    }
+    #languageSelect {
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 10px;
+      margin-top: 20px;
+    }
+    #tamilKeyboard {
+      display: none;
+      margin: 20px auto;
+      max-width: 720px;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr); /* 12 per row */
+      gap: 10px;
+      justify-items: center;
+    }
+
+
+    .key-button {
+      padding: 10px;
+      font-size: 18px;
+      cursor: pointer;
+      background-color: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 5px;
+      color: white;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #controlContainer {
+      background-color: rgba(27, 26, 35, 0.5); /* semi-transparent black */
+      padding: 20px;
+      border-radius: 15px;
+      display: inline-block;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 style="color:green">MSEC AI</h1>
+  <img id="gifImage" src="/static/my static image.jpg" alt="Waiting for question...">
+  <br><br>
+  <input type="text" id="userInput" placeholder="Type your question here...">
+  <div id="answerText"></div>
+  <br>
+  <select id="languageSelect">
+    <option value="english">English</option>
+    <option value="tamil">Tamil</option>
+  </select>
+  <br>
+
+  <div id="controlContainer">
+    <div id="tamilKeyboard">
+
+      <!-- Uyir Ezhuthukkal -->
+      <button class="key-button">அ</button>
+      <button class="key-button">ஆ</button>
+      <button class="key-button">இ</button>
+      <button class="key-button">ஈ</button>
+      <button class="key-button">உ</button>
+      <button class="key-button">ஊ</button>
+      <button class="key-button">எ</button>
+      <button class="key-button">ஏ</button>
+      <button class="key-button">ஐ</button>
+      <button class="key-button">ஒ</button>
+      <button class="key-button">ஓ</button>
+      <button class="key-button">ஔ</button>
+  
+    <!-- Mei Ezhuthukkal -->
+      <button class="key-button">க</button>
+      <button class="key-button">ங</button>
+      <button class="key-button">ச</button>
+      <button class="key-button">ஞ</button>
+      <button class="key-button">ட</button>
+      <button class="key-button">ண</button>
+      <button class="key-button">த</button>
+      <button class="key-button">ந</button>
+      <button class="key-button">ப</button>
+      <button class="key-button">ம</button>
+      <button class="key-button">ய</button>
+      <button class="key-button">ர</button>
+      <button class="key-button">ல</button>
+      <button class="key-button">வ</button>
+      <button class="key-button">ழ</button>
+      <button class="key-button">ள</button>
+      <button class="key-button">ற</button>
+      <button class="key-button">ன</button>
+  
+    <!-- Uyirmei Examples -->
+      <button class="key-button">க்</button>
+      <button class="key-button">ங்</button>
+      <button class="key-button">ச்</button>
+      <button class="key-button">ஞ்</button>
+      <button class="key-button">ட்</button>
+      <button class="key-button">ண்</button>
+      <button class="key-button">த்</button>
+      <button class="key-button">ந்</button>
+      <button class="key-button">ப்</button>
+      <button class="key-button">ம்</button>
+      <button class="key-button">ய்</button>
+      <button class="key-button">ர்</button>
+      <button class="key-button">ல்</button>
+      <button class="key-button">வ்</button>
+      <button class="key-button">ழ்</button>
+      <button class="key-button">ள்</button>
+      <button class="key-button">ற்</button>
+      <button class="key-button">ன்</button>
+    
+      <!-- Uyirmei Mei Ezhuthukkal (additional samples) -->
+      <button class="key-button">க</button>
+      <button class="key-button">கா</button>
+      <button class="key-button">கி</button>
+      <button class="key-button">கீ</button>
+      <button class="key-button">கு</button>
+      <button class="key-button">கூ</button>
+      <button class="key-button">கெ</button>
+      <button class="key-button">கே</button>
+      <button class="key-button">கை</button>
+      <button class="key-button">கொ</button>
+      <button class="key-button">கோ</button>
+      <button class="key-button">கௌ</button>
+
+      <button class="key-button">ங</button>
+      <button class="key-button">ஙா</button>
+      <button class="key-button">ஙி</button>
+      <button class="key-button">ஙீ</button>
+      <button class="key-button">ஙு</button>
+      <button class="key-button">ஙூ</button>
+      <button class="key-button">ஙெ</button>
+      <button class="key-button">ஙே</button>
+      <button class="key-button">ஙை</button>
+      <button class="key-button">ஙொ</button>
+      <button class="key-button">ஙோ</button>
+      <button class="key-button">ஙௌ</button>
+
+      <button class="key-button">ச</button>
+      <button class="key-button">சா</button>
+      <button class="key-button">சி</button>
+      <button class="key-button">சீ</button>
+      <button class="key-button">சு</button>
+      <button class="key-button">சூ</button>
+      <button class="key-button">சே</button>
+      <button class="key-button">சை</button>
+      <button class="key-button">சொ</button>
+      <button class="key-button">சோ</button>
+      <button class="key-button">சௌ</button>
+
+      <button class="key-button">ஞ</button>
+      <button class="key-button">ஞா</button>
+      <button class="key-button">ஞி</button>
+      <button class="key-button">ஞீ</button>
+      <button class="key-button">ஞு</button>
+      <button class="key-button">ஞூ</button>
+      <button class="key-button">ஞெ</button>
+      <button class="key-button">ஞே</button>
+      <button class="key-button">ஞை</button>
+      <button class="key-button">ஞொ</button>
+      <button class="key-button">ஞோ</button>
+      <button class="key-button">ஞௌ</button>
+
+      <button class="key-button">ட</button>
+      <button class="key-button">டா</button>
+      <button class="key-button">டி</button>
+      <button class="key-button">டீ</button>
+      <button class="key-button">டு</button>
+      <button class="key-button">டூ</button>
+      <button class="key-button">டெ</button>
+      <button class="key-button">டே</button>
+      <button class="key-button">டை</button>
+      <button class="key-button">டொ</button>
+      <button class="key-button">டோ</button>
+      <button class="key-button">டௌ</button>
+
+      <button class="key-button">ண</button>
+      <button class="key-button">ணா</button>
+      <button class="key-button">ணி</button>
+      <button class="key-button">ணீ</button>
+      <button class="key-button">ணு</button>
+      <button class="key-button">ணூ</button>
+      <button class="key-button">ணெ</button>
+      <button class="key-button">ணே</button>
+      <button class="key-button">ணை</button>
+      <button class="key-button">ணொ</button>
+      <button class="key-button">ணோ</button>
+      <button class="key-button">ணௌ</button>
+
+      <button class="key-button">த</button>
+      <button class="key-button">தா</button>
+      <button class="key-button">தி</button>
+      <button class="key-button">தீ</button>
+      <button class="key-button">து</button>
+      <button class="key-button">தூ</button>
+      <button class="key-button">தெ</button>
+      <button class="key-button">தே</button>
+      <button class="key-button">தை</button>
+      <button class="key-button">தொ</button>
+      <button class="key-button">தோ</button>
+      <button class="key-button">தௌ</button>
+
+      <button class="key-button">ந</button>
+      <button class="key-button">நா</button>
+      <button class="key-button">நி</button>
+      <button class="key-button">நீ</button>
+      <button class="key-button">நு</button>
+      <button class="key-button">நூ</button>
+      <button class="key-button">நெ</button>
+      <button class="key-button">நே</button>
+      <button class="key-button">நை</button>
+      <button class="key-button">நொ</button>
+      <button class="key-button">நோ</button>
+      <button class="key-button">நௌ</button>
+
+      <button class="key-button">ப</button>
+      <button class="key-button">பா</button>
+      <button class="key-button">பி</button>
+      <button class="key-button">பீ</button>
+      <button class="key-button">பு</button>
+      <button class="key-button">பூ</button>
+      <button class="key-button">பெ</button>
+      <button class="key-button">பே</button>
+      <button class="key-button">பை</button>
+      <button class="key-button">பொ</button>
+      <button class="key-button">போ</button>
+      <button class="key-button">பௌ</button>
+
+      <button class="key-button">ம</button>
+      <button class="key-button">மா</button>
+      <button class="key-button">மி</button>
+      <button class="key-button">மீ</button>
+      <button class="key-button">மு</button>
+      <button class="key-button">மூ</button>
+      <button class="key-button">மெ</button>
+      <button class="key-button">மே</button>
+      <button class="key-button">மை</button>
+      <button class="key-button">மொ</button>
+      <button class="key-button">மோ</button>
+      <button class="key-button">மௌ</button>
+
+      <button class="key-button">ய</button>
+      <button class="key-button">யா</button>
+      <button class="key-button">யீ</button>
+      <button class="key-button">யு</button>
+      <button class="key-button">யூ</button>
+      <button class="key-button">யெ</button>
+      <button class="key-button">யே</button>
+      <button class="key-button">யை</button>
+      <button class="key-button">யொ</button>
+      <button class="key-button">யோ</button>
+      <button class="key-button">யௌ</button>
+
+      <button class="key-button">ர</button>
+      <button class="key-button">ரா</button>
+      <button class="key-button">ரி</button>
+      <button class="key-button">ரீ</button>
+      <button class="key-button">ரு</button>
+      <button class="key-button">ரூ</button>
+      <button class="key-button">ரே</button>
+      <button class="key-button">ரை</button>
+      <button class="key-button">ரௌ</button>
+      <button class="key-button">ரொ</button>
+      <button class="key-button">ரோ</button>
+      <button class="key-button">ரெ</button>
+
+      <button class="key-button">ல</button>
+      <button class="key-button">லா</button>
+      <button class="key-button">லி</button>
+      <button class="key-button">லீ</button>
+      <button class="key-button">லு</button>
+      <button class="key-button">லூ</button>
+      <button class="key-button">லெ</button>
+      <button class="key-button">லே</button>
+      <button class="key-button">லை</button>
+      <button class="key-button">லொ</button>
+      <button class="key-button">லோ</button>
+      <button class="key-button">லௌ</button>
+
+      <button class="key-button">ழ</button>
+      <button class="key-button">ழா</button>
+      <button class="key-button">ழி</button>
+      <button class="key-button">ழீ</button>
+      <button class="key-button">ழு</button>
+      <button class="key-button">ழூ</button>
+      <button class="key-button">ழெ</button>
+      <button class="key-button">ழே</button>
+      <button class="key-button">ழை</button>
+      <button class="key-button">ழொ</button>
+      <button class="key-button">ழோ</button>
+      <button class="key-button">ழௌ</button>
+
+      <button class="key-button">ள</button>
+      <button class="key-button">ளா</button>
+      <button class="key-button">ளி</button>
+      <button class="key-button">ளீ</button>
+      <button class="key-button">ளு</button>
+      <button class="key-button">ளூ</button>
+      <button class="key-button">ளெ</button>
+      <button class="key-button">ளே</button>
+      <button class="key-button">ளை</button>
+      <button class="key-button">ளொ</button>
+      <button class="key-button">ளோ</button>
+      <button class="key-button">ளௌ</button>
+
+      <button class="key-button">ன</button>
+      <button class="key-button">னா</button>
+      <button class="key-button">னி</button>
+      <button class="key-button">னீ</button>
+      <button class="key-button">னு</button>
+      <button class="key-button">னூ</button>
+      <button class="key-button">னெ</button>
+      <button class="key-button">னே</button>
+      <button class="key-button">னை</button>
+      <button class="key-button">னொ</button>
+      <button class="key-button">னோ</button>
+      <button class="key-button">னௌ</button>
+
+    </div>
+  </div>
+
+  <script>
+    const input = document.getElementById("userInput");
+    const img = document.getElementById("gifImage");
+    const answerDiv = document.getElementById("answerText");
+    const languageSelect = document.getElementById("languageSelect");
+    const tamilKeyboard = document.getElementById("tamilKeyboard");
+    const keyButtons = document.querySelectorAll(".key-button");
+
+    languageSelect.addEventListener("change", function () {
+      tamilKeyboard.style.display = languageSelect.value === "tamil" ? "grid" : "none";
+    });
+
+    keyButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        input.value += button.innerText;
+        input.focus();
+      });
+    });
+
+    function playGIF() {
+      img.src = "/static/talking.gif?" + new Date().getTime();
+    }
+
+    function stopGIF() {
+      img.src = "/static/my static image.jpg";
+    }
+
+    function playAudioFromServer(text, language) {
+      fetch('/speak', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ text: text, language: language })
+      })
+      .then(response => response.blob())
+      .then(blob => {
+          const audioUrl = URL.createObjectURL(blob);
+          const audio = new Audio(audioUrl);
+
+          // Play talking gif when audio starts
+          audio.onplay = function() {
+              playGIF();
+          };
+          audio.onended = function() {
+              stopGIF();
+          };
+
+          audio.play();
+      });
+    }
+
+    input.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        const question = input.value.trim();
+        if (question === "") return;
+
+        fetch("/get-answer", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ question: question })
+        })
+        .then(response => response.json())
+        .then(data => {
+          const answer = data.answer;
+          const language = data.language;
+
+          answerDiv.textContent = answer;
+          playAudioFromServer(answer, language);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>
